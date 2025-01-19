@@ -1,5 +1,5 @@
 //407. Trapping Rain Water II (Leetcode)
-
+//Hard
 
 class Solution {
     public int trapRainWater(int[][] heightMap) {
