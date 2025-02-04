@@ -1,0 +1,56 @@
+class Solution {
+    // private void bfs(ArrayList<ArrayList<Integer>> adjList,boolean[] vis, int node) {
+    //     Queue<Integer> queue = new LinkedList<>();
+    //     queue.add(node);
+    //     vis[node] = true;
+
+    //     while(!queue.isEmpty()){
+    //         int curr = queue.remove();
+    //         for(int neighbor: adjList.get(curr)) {
+    //             if(!vis[neighbor]) {
+    //                 vis[neighbor] = true;
+    //                 queue.add(neighbor);
+    //             }
+    //         }
+    //     }
+    // }
+
+    private void dfs(ArrayList<ArrayList<Integer>> adjList, boolean[] vis, int node) {
+        for(int neighbor : adjList.get(node)) {
+            if(!vis[neighbor]) {
+                vis[neighbor] = true;
+                dfs(adjList,vis,neighbor);
+            }
+        }
+    }
+
+    public int findCircleNum(int[][] isConnected) {
+        int V = isConnected.length;
+        ArrayList<ArrayList<Integer>> adjList = new ArrayList<>();
+
+        //Creating a adj List for each vertex such that adjacent nodes can be stored
+        for(int i = 0; i < V; i++) {
+            adjList.add(new ArrayList<>());
+        }
+
+        for(int i = 0; i < V; i++) {
+            for(int j = 0; j < V; j++) {
+                if(isConnected[i][j] == 1) {
+                    adjList.get(i).add(j);
+                }
+            }
+        }
+        
+        boolean[] vis = new boolean[V];
+        int count = 0;
+
+        for (int i = 0; i < V; i++) {
+            if( !vis[i]) {
+                count++;
+                dfs(adjList,vis,i);
+            }
+        }
+
+        return count;
+    }
+}
