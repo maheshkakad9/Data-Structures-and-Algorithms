@@ -1,0 +1,35 @@
+//Best real world problem try to solve it don't skip asked in interviews
+//You can do it 
+
+class Solution {
+    public int totalFruit(int[] fruits) {
+        int i = 0;
+        int j = 0;
+        int n = fruits.length;
+        int k = 2;
+        int numberOfFruits = 0;
+        HashMap<Integer,Integer> map = new HashMap<>();
+        while(j < n) {
+            int fruit = fruits[j];
+            map.put(fruit,map.getOrDefault(fruit,0)+1);
+            if(map.size() < k) {
+                numberOfFruits = Math.max(numberOfFruits,j-i+1);
+                j++;
+            } else if(map.size() == k){
+                numberOfFruits = Math.max(numberOfFruits,j-i+1);
+                j++;
+            } else if(map.size() > k) {
+                while(map.size() > k) {
+                    int leftFruit = fruits[i];
+                    map.put(leftFruit,map.get(leftFruit) - 1);
+                    if(map.get(leftFruit) == 0) {
+                        map.remove(leftFruit);
+                    }
+                    i++;
+                }
+                j++;
+            }
+        }
+        return numberOfFruits;
+    }
+}
