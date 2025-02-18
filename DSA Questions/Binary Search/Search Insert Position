@@ -1,0 +1,21 @@
+//Search Insert Position
+//Link : https://www.naukri.com/code360/problems/algorithm-to-find-best-insert-position-in-sorted-array_839813?utm_source=youtube&utm_medium=affiliate&utm_campaign=codestudio_Striver_BinarySeries&leftPanelTabValue=PROBLEM
+
+public class Solution {
+    public static int searchInsert(int [] arr, int m){
+        int n = arr.length;
+        int low = 0;
+        int high = n -1;
+        int ans = n;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if(arr[mid] >= m) {
+                ans = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+}
