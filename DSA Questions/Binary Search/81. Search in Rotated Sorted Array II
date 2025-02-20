@@ -14,3 +14,37 @@ class Solution {
 //Optimised Solution using Binary Search 
 //TC - O(logn)  in average case 
 //TC - O(n/2) in worst case
+class Solution {
+    public boolean search(int[] nums, int target) {
+        int n = nums.length;
+        int low = 0;
+        int high = n - 1;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if(nums[mid] == target) {
+                return true;
+            }
+
+            if(nums[mid] == nums[low] && nums[mid] == nums[high]) {
+                low++;
+                high--;
+                continue;
+            }
+            //Checking If right part is sorted 
+            if(nums[mid] <= nums[high] ) {
+                if(target >= nums[mid] && target <= nums[high]) {
+                    low = mid + 1;
+                }else {
+                    high = mid - 1;
+                }
+            } else {
+                if(target <= nums[mid] && target >= nums[low]) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
+            }
+        }
+        return false;
+    }
+}
