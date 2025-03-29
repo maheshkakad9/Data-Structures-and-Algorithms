@@ -1,0 +1,38 @@
+//Binary Search on Answers 
+//Brute Force 
+//TC - ~O(n)
+class Solution {
+    int floorSqrt(int n) {
+        int ans = 1;
+        for(int i = 1; i < n; i++) {
+            if(i * i <= n ) {
+                ans = i;
+            } else {
+                break;
+            }
+        }
+        return ans;
+    }
+}
+
+//Optimised using Binary Search
+//TC- O(logn)
+class Solution {
+    public int mySqrt(int x) {
+        if(x == 0) {
+            return 0;
+        }
+        int low = 1;
+        int high = x;
+        while(low <= high) {
+            long mid = (low + high) / 2;
+            long val = mid * mid;
+            if(val > x) {
+                high = (int) mid - 1;
+            } else {
+                low = (int) mid + 1;
+            }
+        } 
+        return high;
+    }
+}
