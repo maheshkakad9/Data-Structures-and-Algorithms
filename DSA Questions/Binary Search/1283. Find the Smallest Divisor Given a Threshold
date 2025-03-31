@@ -1,0 +1,65 @@
+//Brute Force Approached 
+//TC - O(n)
+//TLE
+class Solution {
+    public int totDivisorSum(int[] nums, int divisor) {
+        int totalSum = 0;
+        int n = nums.length;
+        for(int i = 0; i < n; i++) {
+            totalSum += (int) Math.ceil((double) nums[i] / divisor);
+        }
+        return totalSum;
+    }
+    public int smallestDivisor(int[] nums, int threshold) {
+        int maxi = Integer.MIN_VALUE;
+        int n = nums.length;
+        for(int i = 0; i < n; i++) {
+            maxi = Math.max(maxi,nums[i]);
+        }
+
+        int divisorSum = 0;
+        for(int i = 1; i<=maxi; i++) {
+            divisorSum = totDivisorSum(nums,i);
+            if(divisorSum <= threshold) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+
+//Optimised Solution Using Binary Search
+//TC - O(logn)
+class Solution {
+    public int totDivisorSum(int[] nums, int divisor) {
+        int totalSum = 0;
+        int n = nums.length;
+        for(int i = 0; i < n; i++) {
+            totalSum += (int) Math.ceil((double) nums[i] / divisor);
+        }
+        return totalSum;
+    }
+    public int smallestDivisor(int[] nums, int threshold) {
+        int maxi = Integer.MIN_VALUE;
+        int n = nums.length;
+        for(int i = 0; i < n; i++) {
+            maxi = Math.max(maxi,nums[i]);
+        }
+
+        int divisorSum = 0;
+        int low = 1;
+        int high = maxi;
+        int ans = 0;
+        while(low <= high) {
+            int mid = (low + high) / 2;
+            divisorSum = totDivisorSum(nums,mid);
+            if(divisorSum <= threshold) {
+                ans = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+}
