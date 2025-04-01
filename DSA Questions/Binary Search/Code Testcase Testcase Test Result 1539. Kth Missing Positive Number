@@ -1,0 +1,48 @@
+//Brute Force approached
+//TC - O(n)
+class Solution {
+    public boolean checkMissing(int[] arr, int number) {
+        for(int i = 0; i < arr.length; i++) {
+            if (arr[i] == number) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public int findKthPositive(int[] arr, int k) {
+        int n = arr.length;
+        int maxRange = arr[n-1] + k;
+        for(int i = 1; i <= maxRange; i++) {
+            if(!checkMissing(arr,i)) {
+                k--;
+            }
+            if(k == 0) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+
+//Another simple Brute Force
+import java.util.*;
+
+public class tUf {
+    public static int missingK(int[] vec, int n, int k) {
+        for (int i = 0; i < n; i++) {
+            if (vec[i] <= k) k++; //shifting k
+            else break;
+        }
+        return k;
+    }
+    public static void main(String[] args) {
+        int[] vec = {4, 7, 9, 10};
+        int n = 4, k = 4;
+        int ans = missingK(vec, n, k);
+        System.out.println("The missing number is: " + ans);
+    }
+}
+
+//Optimised Using Binary Search
+//TC- O(n)
+//See strivers video
