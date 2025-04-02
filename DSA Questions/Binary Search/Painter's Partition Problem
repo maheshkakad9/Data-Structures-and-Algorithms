@@ -1,5 +1,5 @@
 //Brute Force Solution
-//TC - O(n)(maxi+sum-1) * O(n)
+//TC - O(maxi+sum-1) * O(n)
 public class Solution 
 {
     public static int calculatePainter(ArrayList<Integer> boards, int time) {
