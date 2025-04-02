@@ -1,5 +1,5 @@
 //Brute Force
-//TC - O(n) i.e. from (maxi + sum - 1) + O(n)
+//TC - O(maxi+sum-1) * O(n)
 //Time Limit exceed
 import java.util.ArrayList;
 public class Solution {
@@ -36,7 +36,7 @@ public class Solution {
 
 //Optimised Solution
 //Using Binary Search
-TC- O(logn(maxi-sum+1))+O(n)
+TC- O(logn(maxi-sum+1))*O(n)
 import java.util.ArrayList;
 public class Solution {
     public static int checkAllocation(ArrayList<Integer> arr,int pages) {
