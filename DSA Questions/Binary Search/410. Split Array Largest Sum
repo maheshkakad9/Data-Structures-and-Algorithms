@@ -1,5 +1,5 @@
 //Brute Force
-//TC- O(maxi+sum-1) + O(n)
+//TC- O(maxi+sum-1) * O(n)
 class Solution {
     public int minimumSubArrayCount(int[] nums, int minimumSum) {
         int n = nums.length;
@@ -35,7 +35,7 @@ class Solution {
 }
 
 //Optimised Solution using Binary Search
-//TC - O(logn(maxi+sum-1)) + O(n)
+//TC - O(logn(maxi+sum-1)) * O(n)
 
 class Solution {
     public int minimumSubArrayCount(int[] nums, int minimumSum) {
