@@ -1,5 +1,5 @@
 //Brute Force
-//TC - O(n)
+//TC - O(n1 + n2) //In all the cases
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int n1 = nums1.length;
@@ -31,3 +31,59 @@ class Solution {
         return median;
     }
 }
+//Brute Force
+//Slightly Better Approached 
+//TC - O(n1 + n2) Worst case
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int n1 = nums1.length;
+        int n2 = nums2.length;
+        int n = n1 + n2;
+        int ind2 = (n1 + n2) / 2;
+        int ind1 = ind2 - 1;
+        int ind2el = -1;
+        int ind1el = -1;
+        int count = 0;
+
+        int i = 0, j = 0;
+        while (i < n1 && j < n2) {
+            if (nums1[i] < nums2[j]) {
+                if(count == ind1) ind1el = nums1[i];
+                if(count == ind2) ind2el = nums1[i];
+                count++;
+                i++;
+            } else {
+                if(count == ind1) ind1el = nums2[j];
+                if(count == ind2) ind2el = nums2[j];
+                count++;
+                j++;
+            }
+
+            if(ind1el != -1 && ind2el != -1) {
+                break;
+            }
+        }
+
+        while (i < n1) {
+            if(count == ind1) ind1el = nums1[i];
+            if(count == ind2) ind2el = nums1[i];
+            count++;
+            i++;
+        }
+        while (j < n2) {
+            if(count == ind1) ind1el = nums2[j];
+            if(count == ind2) ind2el = nums2[j];
+            count++;
+            j++;
+        }
+        //Odd size nums3 case
+        if (n % 2 == 1) {
+            return ind2el;
+        }
+        //Even size nums3 case 
+        double median = ((double) ind1el + (double) ind2el) / 2.0;
+        return median;
+    }
+}
+
+//Optimised Solution
