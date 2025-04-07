@@ -1,0 +1,59 @@
+//Brute Force
+//TC - O(n * m)
+//SC - O(1)
+class Solution {
+    public int rowWithMax1s(int arr[][]) {
+        int n = arr.length; //Rows
+        int m = arr[0].length;  //Columns
+        int max_count = 0;
+        int index = -1;
+        for (int i = 0; i < n; i++) {
+            int ones_count = 0;
+            for(int j = 0; j < m; j++) {
+                ones_count += arr[i][j];
+            }
+            if(ones_count > max_count) {
+                    max_count = ones_count;
+                    index = i;
+            }
+        }
+        return index;
+    }
+}
+
+//Optimised solution
+//Using Binary Search
+//TC - O(n) + O(logn)
+class Solution {
+    public int lowerBound(int arr[],int m, int x) {
+        int low = 0;
+        int high = m -1;
+        int ans = m;
+        
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            
+            if (arr[mid] >= x) {
+                ans = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+    public int rowWithMax1s(int arr[][]) {
+        int n = arr.length; //Rows
+        int m = arr[0].length;  //Columns
+        int max_count = 0;
+        int index = -1;
+        for (int i = 0; i < n; i++) {
+            int ones_count = m - lowerBound(arr[i],m,1);
+            if(ones_count > max_count) {
+                    max_count = ones_count;
+                    index = i;
+            }
+        }
+        return index;
+    }
+}
