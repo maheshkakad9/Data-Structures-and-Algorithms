@@ -20,6 +20,7 @@ class Solution {
 }
 
 //Optimal Solution using Two Pointer Approached
+//TC- O(n)
 class Solution {
     public int maxArea(int[] height) {
         int Lpointer = 0;
