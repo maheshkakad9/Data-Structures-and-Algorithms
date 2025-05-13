@@ -1,0 +1,39 @@
+//Brute Force Approached 
+//TLE -
+//TC- O(n*n)
+class Solution {
+    public int maxArea(int[] height) {
+        int waterArea = 0;
+        int maxArea = 0;
+        int het = 0;
+        int width = 0;
+        for(int i = 0; i < height.length - 1; i++) {
+            for (int j = i + 1; j < height.length; j++) {
+                het = Math.min(height[i],height[j]);
+                width = j - i;
+                waterArea = het * width;
+                maxArea = Math.max(maxArea,waterArea);
+            }
+        }
+        return maxArea;
+    }
+}
+
+//Optimal Solution using Two Pointer Approached
+class Solution {
+    public int maxArea(int[] height) {
+        int Lpointer = 0;
+        int Rpointer = height.length - 1;
+        int maxArea = 0;
+        while(Lpointer < Rpointer) {
+            if (height[Lpointer] < height[Rpointer]) {
+                maxArea = Math.max(maxArea,height[Lpointer] * (Rpointer - Lpointer));
+                Lpointer++;
+            } else {
+                maxArea = Math.max(maxArea,height[Rpointer] * (Rpointer - Lpointer));
+                Rpointer--;
+            }
+        }
+        return maxArea;
+    }
+}
