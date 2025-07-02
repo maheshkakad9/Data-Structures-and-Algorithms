@@ -1,0 +1,33 @@
+//Optimal Solution
+//TC - O(Square root of n)
+class Solution {
+    static boolean isPrime(int n) {
+        // code here
+        if (n <= 1) return false;
+        int sqrt = (int) Math.sqrt(n);
+        for(int i = 2; i <= sqrt; i++) {
+            if(n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+//The optimal approached is same as the approached for divisor question
+
+//Brute Force Appproached
+//TC O(n) Time Limit Exceed 
+class Solution {
+    static boolean isPrime(int n) {
+        // code here
+        if (n <= 1) return false;
+        int sqrt = (int) Math.sqrt(n);
+        for(int i = 2; i < n; i++) {
+            if(n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
