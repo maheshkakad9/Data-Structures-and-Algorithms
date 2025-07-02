@@ -1,0 +1,41 @@
+//Solution GeeksforGeeks
+
+// User function Template for Java
+class Solution {
+    static boolean armstrongNumber(int n) {
+        // code here
+        int ans = 0;
+        String number = Integer.toString(n);
+        int len = number.length();
+        
+        for(int i = 0; i < len; i++) {
+            int digit = number.charAt(i) - '0';
+            ans += Math.pow(digit,len);
+        }
+        
+        return ans == n;
+    }
+}
+
+//✅ What is an Armstrong Number?
+//An Armstrong number (also known as a narcissistic number, pluperfect number, or pluperfect 
+digital invariant (PPDI)) is a number that is equal to the sum of its own digits each raised to the 
+power of the number of digits(or length of integer x).
+
+//Solution Overview
+// So here we are first converting the integer n int String using the function Integer.toString()
+// Then we calculate the String length for the calculation of power
+// Now we iterate over all the element in the string
+// We need to convert the String element i.e. let suppose x = 123
+then String will be stored as number = '123'
+So to convert string element into integer one by one 
+we use a method number.charAt(i) - '0'
+i.e '1' - '0' = 1
+    '2' - '0' = 2  This is how we get integers again
+
+//Now we calculate the final answer using the Math.pow() method we passed the converted integer digit
+and the length of the string (Which is the length of the integer or number of digits in the integer)
+
+i.e ans = Math.pow(digit,len)
+
+Finally we compare if ans == n and return true or false i.e boolean value
