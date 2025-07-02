@@ -1,0 +1,72 @@
+//Solution GeeksForGeeks
+//Brute Force  TC - O(n)
+//Simple Brute Force is to check for every possible divisor on integer n through iterating over from 1 to n
+
+class Solution {
+
+    public static void print_divisors(int n) {
+        // code here
+        ArrayList<Integer> ans = new ArrayList<>();
+        
+        for (int i = 1; i <= n; i++){
+            if (n % i == 0) {
+                ans.add(i);
+            }
+        }
+        
+        for (int divisor : ans) {
+            System.out.print(divisor + " ");
+        }
+    }
+}
+
+//Here return type is void 
+//So always remember when the return type is void you can not print any array or arraylist or data structure
+//You need to iterate over that data structure and then simple print each iteration 
+
+✅ How to handle void?
+When a method is void, it means it performs an action like printing, but does not return any value.
+
+
+//Optimal Solution  
+//TC - O(Square root of n)
+class Solution {
+
+    public static void print_divisors(int n) {
+        // code here
+        ArrayList<Integer> ans = new ArrayList<>();
+        int sqrt = (int) Math.sqrt(n);
+        
+        for (int i = 1; i <= sqrt; i++){
+            if (n % i == 0) {
+                ans.add(i);
+                
+                if (i != (n / i)){
+                    ans.add(n / i);
+                }
+            }
+        }
+        Collections.sort(ans);
+        for (int divisor : ans) {
+            System.out.print(divisor + " ");
+        }
+    }
+}
+
+//Here we are trying the optimal way let int x = 36;
+so we just calculate the square root of it which is 6
+So the possible divisor combinations are like this
+ 1 * 36 = 36 * 1
+2 * 18 = 18 * 2
+3 * 12 = 12 * 3
+4 * 9 = 9 * 4
+6 * 6 = 6 * 6
+So by upto square root we calculate all the possible candidates
+So we calculate the first divisor as i , we find the corresponding pair by diving n by i i.e n / i and
+//We need to check another condition i.e n / i is not equal to i here in example 6 != 6 , if they are not equal then only we add it into the arrayList
+//So now we calculated all the possible divisors but they get stored in unsorted order 
+//i.e 1 36 2 18 3 12 4 9 6
+Now We need the sorted answer
+// So we use the method name Collections.sort(ans)
+//And finnaly we iterate over all the arraylist using for each loop and then print the divisors one by one 
+//THis is the overview of the solution
