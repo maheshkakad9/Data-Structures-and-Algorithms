@@ -1,0 +1,55 @@
+// Solution GeeksForGeeks
+//Brute Force TC - O(min(a,b)) Worst Case
+//Time Limit exit
+class Solution {
+    public static int gcd(int a, int b) {
+        // code here
+        int gcd = 1;
+        for(int i = 1; i <= Math.min(a,b); i++) {
+            if(a % i == 0 && b % i == 0) {
+                gcd = i;
+            }
+        }
+        return gcd;
+    }
+}
+
+//Better Approached
+//Time Limit Exit again
+//TC - O(min(a,b)) Worst Case
+class Solution {
+    public static int gcd(int a, int b) {
+        // code here
+        int gcd = 1;
+        for(int i = Math.min(a,b); i > 1; i--) {
+            if(a % i == 0 && b % i == 0) {
+                return i;
+            }
+        }
+        return 1;
+    }
+}
+//Here again same approached but we are counting gcd from the larger digit to the 1
+//Hence the first digit which is find as a divisor to the both is considered as GCD
+
+//Optimal Approached
+// TC - O(min(a,b))
+//This solution is based on  Euclidean Algorithm 
+//Please read strivers article if you don't understand
+class Solution {
+    public static int gcd(int a, int b) {
+        while(a > 0 && b > 0) {
+            if (a > b) {
+                a = a % b;
+            } else {
+                b = b % a;
+            }
+        }
+        if (a == 0) {
+            return b;
+        }
+            return a;
+    }
+}
+
+
