@@ -1,0 +1,10 @@
+//Count Digits GeeksforGeeks
+//TC - O(logn) 
+//Integer.toString() takes O(logn) time
+class Solution {
+    public int countDigits(int n) {
+        // code here
+        String number = Integer.toString(n);
+        return number.length();
+    }
+}
