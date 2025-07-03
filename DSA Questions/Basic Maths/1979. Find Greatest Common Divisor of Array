@@ -1,0 +1,27 @@
+//Leetcode
+//Brute Force Solution
+//TC - O(n) + O(n) + O(n)
+class Solution {
+    public int findGCD(int[] nums) {
+        int smallestNumber = Integer.MAX_VALUE;
+        int biggestNumber = Integer.MIN_VALUE;
+
+        for(int i=0;i<nums.length;i++) {
+            if(nums[i] < smallestNumber){
+                smallestNumber = nums[i];
+            }
+        }
+        for(int i=0;i<nums.length; i++) {
+            if(nums[i] > biggestNumber){
+                biggestNumber = nums[i];
+            }
+        }
+        int ans = 0;
+        for(int i = 1; i <= biggestNumber; i++){
+            if(smallestNumber % i == 0 && biggestNumber % i == 0) {
+                ans = i;
+            }
+        }
+        return ans;
+    }
+}
