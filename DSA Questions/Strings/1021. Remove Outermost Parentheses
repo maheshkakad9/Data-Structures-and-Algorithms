@@ -1,0 +1,29 @@
+class Solution {
+    public String removeOuterParentheses(String s) {
+        int len = s.length();
+        if (len <= 2) {
+            return "";
+        }
+
+        char[] ch = s.toCharArray();
+        StringBuilder ans = new StringBuilder();
+        int open = 1;
+        for(int i=1; i < len; i++) {
+            if(ch[i] == '(') {
+                open++;
+                if(open > 1) {
+                    ans.append(ch[i]);
+                }
+            } else {
+                if(open > 1) {
+                    ans.append(ch[i]);
+                }
+                open--;
+            }
+        }
+        return ans.toString();
+    }
+}
+
+//TC -> O(n)
+//SC -> O(n)
