@@ -1,0 +1,54 @@
+//TC - O(n)
+//Method : Using Stack
+//SC - O(n)
+class Solution {
+    public int maxDepth(String s) {
+        int n = s.length();
+        Stack<Character> stack = new Stack<>();
+        int maximumDepth = Integer.MIN_VALUE;
+        int count = 0;
+        for(int i=0; i<n; i++) {
+            char element = s.charAt(i);
+            if(element == '(') {
+                stack.push(element);
+                count++;
+                maximumDepth = Math.max(maximumDepth,count);
+            } else if(element == ')') {
+                stack.pop();
+                count--;
+            } else {
+                continue;
+            }
+        }
+
+        if(maximumDepth == Integer.MIN_VALUE) {
+            return 0;
+        }
+        return maximumDepth;
+    }
+}
+
+//Brute Force with optimised space without using stack
+
+TC - O(n)
+SC - O(1)
+class Solution {
+    public int maxDepth(String s) {
+        int n = s.length();
+        int count = 0;
+        int maxDepthCount = 0;
+        for (int i=0; i<n; i++) {
+            char element = s.charAt(i);
+            if (element == '(') {
+                count++;
+                maxDepthCount = Math.max(count,maxDepthCount);
+            } else if (element == ')') {
+                count--;
+            } else {
+                continue;
+            }
+        }
+
+        return maxDepthCount;
+    }
+}
