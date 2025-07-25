@@ -1,0 +1,32 @@
+//TC :
+Time Complexity:
+Outer loop: O(n)
+
+Inner loop: O(n)
+
+Frequency scan: O(26) → constant
+
+✅ Total: O(n²) (same as original, but much faster in practice)
+//SC : freq array: O(26) = O(1) (constant space)
+class Solution {
+    public int beautySum(String s) {
+        int totAns = 0;
+        int n = s.length();
+
+        for(int i=0; i<n; i++) {
+            int[] freq = new int[26];
+            for(int j=i; j<n; j++) {
+                freq[s.charAt(j) - 'a']++;
+                int max = 0, min = Integer.MAX_VALUE;
+                for (int f: freq) {
+                    if (f > 0) {
+                        max = Math.max(max,f);
+                        min = Math.min(min,f);
+                    }
+                }
+                totAns += (max - min);
+            }
+        }
+        return totAns;
+    }
+}
