@@ -1,0 +1,47 @@
+//Brute Force Solution using extra data structure Stack
+//TC - O(n) + O(n) = 2O(n) = O(n)
+//SC - O(n)
+
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        Stack<Integer> stack = new Stack<>();
+        ListNode temp = head;
+
+        while(temp != null) {
+            stack.push(temp.val);
+            temp = temp.next;
+        }
+
+        temp = head;
+        while(temp != null) {
+            temp.val = stack.pop();
+            temp = temp.next;
+        }
+
+        return head;
+    }
+}
+
+//Without using extra space
+//using three variables temp, front, prev
+//TC - O(n)
+//SC - O(1)
+
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode temp = head;
+        ListNode prev = null;
+
+        while(temp != null) {
+            ListNode front = temp.next;
+            temp.next = prev;
+            prev = temp;
+
+            temp = front;
+        }
+
+        return prev;
+    }
+}
+
+//3rd approached is recursive learn it after you revised the recursion
