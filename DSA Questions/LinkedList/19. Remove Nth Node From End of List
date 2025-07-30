@@ -1,0 +1,56 @@
+//TC - O(L) + O(L-n) = O(2n) ~ O(n)
+//SC - O(1)
+
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        int length = 0;
+        ListNode temp = head;
+
+        while(temp != null) {
+            length++;
+            temp = temp.next;
+        }
+         
+        //If only one element present in the list we need to delete the first node and return null
+        if(length == n) {
+            return head.next;
+        }
+
+        temp = head;
+        for(int i=1; i < length - n; i++) {
+            temp = temp.next;
+        }
+
+        temp.next = temp.next.next;
+
+        return head;
+    }
+}
+
+//Using slow and fast pointer 
+//TC - O(L)
+//SC -O(1)
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode slow = head;
+        ListNode fast = head;
+
+        for(int i = 0; i < n; i++) {
+            fast = fast.next;
+        }
+
+        if (fast == null) {
+            return head.next;
+        }
+
+        while(fast.next != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+
+        // ListNode delNode = slow.next;
+        slow.next = slow.next.next;
+        // delNode = null;
+        return head;
+    }
+}
