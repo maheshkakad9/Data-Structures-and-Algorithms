@@ -1,0 +1,26 @@
+//Brute Force Approached
+//Using extra list and sorting
+//TC - O(n) + O(n) + O(nlogn) = O(nlogn) = O(nlogn)
+//SC - O(n) as we are using extra space
+
+class Solution {
+    public ListNode sortList(ListNode head) {
+        ArrayList<Integer> list = new ArrayList<>();
+        ListNode temp = head;
+        while(temp != null) {
+            list.add(temp.val);
+            temp = temp.next;
+        }
+
+        Collections.sort(list);
+        temp = head;
+        for(int i=0;i < list.size(); i++) {
+            temp.val = list.get(i);
+            temp = temp.next;
+        }
+        return head;
+    }
+}
+
+//The Second Approached using Divide and Conquer method(Merge Sort) 
+//Learn this once you practiced Divide and Conquer
