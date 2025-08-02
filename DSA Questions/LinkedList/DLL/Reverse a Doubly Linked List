@@ -1,0 +1,93 @@
+//Implemented Using Scratch
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+import java.util.Stack;
+class Main {
+    public static class Node {
+        public int data;
+        public Node next;
+        public Node back;
+        
+        //Constructor for a node with reference to the prev and next node
+        public Node(int data1,Node next1,Node back1) {
+            data = data1;
+            next = next1;
+            back = back1;
+        }
+        
+        //Constructor for a node without reference to the prev and next node(end of the list )
+        public Node(int data1) {
+            data = data1;
+            next = null;
+            back = null;
+        }
+    }
+    public static Node convertArrDLL(int[] arr){
+        Node head = new Node(arr[0]);
+        
+        Node prev = head;
+        
+        for(int i=1;i<arr.length;i++) {
+            Node temp = new Node(arr[i],null,prev);
+            
+            prev.next = temp;
+            prev = temp;
+        }
+        
+        return head;
+    }
+    
+    public static void print(Node head) {
+        while(head!= null) {
+            System.out.print(head.data+" ");
+            head = head.next;
+        }
+        System.out.println();
+    }
+    public static Node reverseDLL(Node head) {
+        Node prev = null;
+        Node current = head;
+        
+        while(current != null) {
+            prev = current.back;
+            current.back = current.next;
+            current.next = prev;
+            
+            current = current.back;
+        }
+        
+        return prev.back;
+    }
+    public static Node reverseDLLStack(Node head) {
+        Stack<Integer> st = new Stack<>();
+        
+        Node temp = head;
+        while(temp != null) {
+            st.push(temp.data);
+            temp = temp.next;
+        }
+        
+        temp = head;
+        while(!st.isEmpty()) {
+            temp.data = st.pop();
+            temp = temp.next;
+        }
+        return head;
+    }
+    public static void main(String[] args) {
+        int[] arr = new int[5];
+        arr = new int[]{1,2,3,4,5};
+        Node head = convertArrDLL(arr);
+        
+        System.out.println("Linkedlist initially:");
+        print(head);
+        
+        // System.out.println("Reversed Linked List:");
+        // head = reverseDLL(head);
+        // print(head);
+        
+        //System.out.println("Reversed Linked List using Stack:");
+        head = reverseDLLStack(head);
+        print(head);
+    }
+}
