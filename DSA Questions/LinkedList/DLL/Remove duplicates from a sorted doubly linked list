@@ -1,0 +1,23 @@
+//TC - O(n)
+//SC - O(1)
+
+// User function Template for Java
+class Solution {
+    Node removeDuplicates(Node head) {
+        // Code Here.
+        Node current = head;
+        
+        while(current != null && current.next != null) {
+            if (current.data == current.next.data) {
+                Node dub = current.next;
+                current.next = dub.next;
+                if(dub.next != null) {
+                    dub.next.prev = current;
+                }
+            } else {
+                current = current.next;
+            }
+        }
+        return head;
+    }
+}
