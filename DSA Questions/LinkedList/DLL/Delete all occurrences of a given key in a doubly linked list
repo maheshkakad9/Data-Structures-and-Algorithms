@@ -1,0 +1,25 @@
+//TC - O(n)
+//SC - O(1)
+class Solution {
+    static Node deleteAllOccurOfX(Node head, int x) {
+        Node current = head;
+        
+        while (current != null) {
+            if(current.data == x) {
+                if(current.prev == null) {
+                    head = current.next;
+                    if (head != null) {
+                        head.prev = null;
+                    }
+                } else {
+                    current.prev.next = current.next;
+                    if(current.next != null) {
+                        current.next.prev = current.prev;
+                    }
+                }
+            }
+            current = current.next;
+        }
+        return head;
+    }
+}
