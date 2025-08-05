@@ -48,9 +48,6 @@ class Solution {
 //Considering odd number of n and even number of n
 class Solution {
     public double myPow(double x, long n) {
-        if(n == 0) {
-            return 1.0;
-        }
         if(n < 0) {
             x = 1 / x; // If n is less than 0 convert x = 1 / x and then n = -n
             n = -n;
