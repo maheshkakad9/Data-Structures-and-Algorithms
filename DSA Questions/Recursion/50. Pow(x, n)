@@ -27,3 +27,45 @@ class Solution {
         return ans;
     }
 }
+
+//TLE 
+class Solution {
+    public double myPow(double x, int n) {
+        double ans = 1.0;
+        long N = n;
+        if(N < 0) {
+            x = 1 / x;
+            N = -N;
+        }
+        for (int i=0; i<N; i++){
+            ans = ans * x;        
+        }
+        return ans;
+    }
+}
+
+//Most optimised solution
+//Considering odd number of n and even number of n
+class Solution {
+    public double myPow(double x, long n) {
+        if(n == 0) {
+            return 1.0;
+        }
+        if(n < 0) {
+            x = 1 / x; // If n is less than 0 convert x = 1 / x and then n = -n
+            n = -n;
+        }
+        return power(x,n);
+    }
+    public double power(double x, long n) {
+        if(n == 0) return 1.0;
+
+        double half = power(x, n / 2);  //Calculate the half power 
+
+        if(n % 2 == 0) {
+            return half * half;  //For even half * half = full
+        } else {    
+            return half * half * x;  //For odd half * half * x 
+        }
+    }
+}
