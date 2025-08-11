@@ -1,0 +1,33 @@
+//Using Monotonic Stack
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        int n = nums.length;
+        int[] doubArr = new int[n*2];
+        Stack<Integer> st = new Stack();
+
+        //Create Double Array
+        for(int i=0;i<n;i++) {
+            doubArr[i] = nums[i];
+            doubArr[i+n] = nums[i];
+        }
+
+        //Create Monotonic stack
+        int m = doubArr.length;
+        int[] ans = new int[m];
+        for(int i=m-1;i>=0;i--) {
+                while(!st.isEmpty() && st.peek() <= doubArr[i]) {
+                    st.pop();
+                }
+                ans[i] = st.isEmpty() ? -1: st.peek();
+                st.push(doubArr[i]);
+        }
+
+        //Create result array
+        int[] result = new int[n];
+        for(int i=0; i <n; i++) {
+            result[i] = ans[i];
+        }
+        return result;
+    }
+}
+
