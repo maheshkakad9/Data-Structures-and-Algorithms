@@ -1,0 +1,41 @@
+//Implement Queue using Arrays
+class ArrayQueue {
+    int[] queue;
+    int size = 100;
+    int front,rear,currSize;
+    public ArrayQueue() {
+        queue = new int[size];
+        front = 0;
+        rear = -1;
+        currSize = 0;
+    }
+
+    public void push(int x) {
+        if(currSize != size) {
+            rear++;
+        } else {
+            rear = (rear + 1) % size;
+        }
+        queue[rear] = x;
+        currSize++;
+    }
+
+    public int pop() {
+        if(front != size) {
+            return queue[front++];
+        }else {
+            return queue[(front+1)%size];
+        }
+    }
+
+    public int peek() {
+        return queue[front];
+    }
+
+    public boolean isEmpty() {
+        if(rear == -1){
+            return true;
+        }
+        return false;
+    }
+}
