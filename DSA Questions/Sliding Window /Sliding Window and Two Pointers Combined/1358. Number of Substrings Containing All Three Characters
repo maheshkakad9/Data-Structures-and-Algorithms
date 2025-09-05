@@ -40,6 +40,8 @@ class Solution {
 
 
 //Optimised Solution
+//TC -O(n)
+//SC - O(1)
 //We have to find the minimum size window containing a,b,c and then the subarrays are the minimum index + 1
 class Solution {
     public int numberOfSubstrings(String s) {
