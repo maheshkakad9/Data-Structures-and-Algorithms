@@ -1,0 +1,57 @@
+//Brute Force Solution
+//TLE
+//TC - O(n*n)
+class Solution {
+    public int numberOfSubstrings(String s) {
+        int ans = 0;
+        for(int i=0;i<s.length();i++) {
+            int acount = 0, bcount = 0, ccount = 0;
+            for(int j=i;j<s.length();j++) {
+                char ch = s.charAt(j);
+                if(ch == 'a') acount++;
+                else if (ch == 'b') bcount++;
+                else ccount++;
+
+                if(acount > 0 && bcount > 0 && ccount>0) {
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+}
+
+//Another Brute Force Using hash array
+class Solution {
+    public int numberOfSubstrings(String s) {
+        int ans = 0;
+        for(int i=0;i<s.length();i++) {
+            int[] hash = new int[3];
+            for(int j=i;j<s.length();j++) {
+                hash[s.charAt(j) - 'a'] = 1;
+                if((hash[0] + hash[1] + hash[2]) == 3) {
+                    ans++;
+                } 
+            }
+        }
+        return ans;
+    }
+}
+
+
+//Optimised Solution
+//We have to find the minimum size window containing a,b,c and then the subarrays are the minimum index + 1
+class Solution {
+    public int numberOfSubstrings(String s) {
+        int[] lastseen = {-1,-1,-1};
+        int count = 0;
+        for(int i=0;i<s.length();i++) {
+            lastseen[s.charAt(i)-'a'] = i;
+
+            if(lastseen[0] != -1 && lastseen[1] != -1 && lastseen[2] != -1) {
+                count = count + (1 + Math.min(lastseen[0],Math.min(lastseen[1],lastseen[2])));
+            } 
+        }
+        return count;
+    }
+}
