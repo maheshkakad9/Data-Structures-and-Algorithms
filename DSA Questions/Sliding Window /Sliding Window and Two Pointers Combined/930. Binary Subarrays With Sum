@@ -1,0 +1,66 @@
+//Brute Force
+//TC - O(n*n)
+class Solution {
+    public int numSubarraysWithSum(int[] nums, int goal) {
+        int sumCount = 0;
+        int n = nums.length;
+
+        for(int i=0;i<n;i++) {
+            int currSum = 0;
+            for(int j=i;j<n;j++) {
+                currSum += nums[j];
+                if(currSum == goal) {
+                    sumCount++;
+                }
+            }
+        }
+        return sumCount;
+    }
+}
+
+
+
+//Solution using Prefix Sum
+//TC - O(n)
+//SC - O(n)
+class Solution {
+    public int numSubarraysWithSum(int[] nums, int goal) {
+        int sum = 0, ans = 0;
+        Map<Integer,Integer> map = new HashMap<>();
+        for(int i=0;i<nums.length;i++) {
+            sum+=nums[i];
+            if(sum == goal) {
+                ans++;
+            }
+            if(map.containsKey(sum-goal)){
+                ans += map.get(sum-goal);
+            }
+            map.put(sum,map.getOrDefault(sum,0)+1);
+        }
+        return ans;
+    }
+}
+
+//Sliding Window Approached
+//Optimised Space Complexity Solution 
+//SC - O(1)
+//TC - O(2 * 2n)
+class Solution {
+    public int numSubarraysWithSum(int[] nums, int goal) {
+        return countSubarrays(nums,goal) - countSubarrays(nums,goal-1);
+    }
+    private int countSubarrays(int[] nums, int goal) {
+        if (goal < 0) return 0;
+        int left = 0, right = 0, sum = 0, count = 0;
+        while (right < nums.length) {
+            sum += nums[right];
+            while (sum > goal) {
+                sum = sum - nums[left];
+                left = left + 1;
+            }
+            count = count + (right - left + 1);
+            right = right + 1;
+        }
+        return count;
+    }
+}
