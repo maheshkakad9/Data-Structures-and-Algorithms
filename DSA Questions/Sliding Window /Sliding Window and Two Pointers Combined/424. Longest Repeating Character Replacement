@@ -1,0 +1,53 @@
+//Brute Force Solution
+//TC - O(n*n)
+//SC - O(26)
+//TLE
+class Solution {
+    public int characterReplacement(String s, int k) {
+        int n = s.length();
+        int maxLength = 0;
+        for(int i=0;i<n;i++) {
+            int[] hash = new int[26];
+            int maxFreq = 0;
+            int length = 0;
+            for(int j=i;j<n;j++) {
+                hash[s.charAt(j)-'A']++;
+                maxFreq = Math.max(maxFreq,hash[s.charAt(j)-'A']);
+                length++;
+                if((length - maxFreq) <= k) {
+                    maxLength = Math.max(length,maxLength);
+                }
+                if((length - maxFreq) > k) {
+                    break;
+                }
+            }
+        }
+        return maxLength;
+    }
+}
+
+//Optimised Solution
+//TC  - O(n)
+//SC - O(26)
+class Solution {
+    public int characterReplacement(String s, int k) {
+        int left = 0, right = 0 , maxLength = 0, maxLengthOfChar = 0;
+        int[] freq = new int[26];
+        while(right < s.length()) {
+            freq[s.charAt(right) - 'A']++;
+            maxLengthOfChar = Math.max(maxLengthOfChar,freq[s.charAt(right) - 'A']);
+            while((right - left + 1) - maxLengthOfChar > k) {
+                freq[s.charAt(left) - 'A']--;
+                for(int i=0;i<26;i++) {
+                    maxLengthOfChar = Math.max(maxLengthOfChar,freq[i]);
+                }
+                left++;
+            }
+            if((right - left + 1) - maxLengthOfChar <= k) {
+                maxLength = Math.max(maxLength,right-left+1);
+                right++;
+            }
+        }
+        return maxLength;
+    }
+}
