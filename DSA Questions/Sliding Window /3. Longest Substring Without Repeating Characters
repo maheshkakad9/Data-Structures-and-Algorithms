@@ -26,3 +26,33 @@ class Solution {
         return length;
     }
 }
+
+
+//Same answer but with left and right pointer 
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int left = 0;
+        int right = 0;
+        int n = s.length();
+        int length = 0;
+        Map<Character,Integer> map = new HashMap<>();
+        while(right < n) {
+            char ch = s.charAt(right);
+            map.put(ch,map.getOrDefault(ch,0)+1);
+            if(map.size() == (right - left + 1)) {
+                length = Math.max(length,(right-left+1));
+            } else if (map.size() < (right - left + 1)){
+                while(map.size() < (right - left + 1)) {
+                    char ch1 = s.charAt(left);
+                    map.put(ch1,map.get(ch1)-1);
+                    if(map.get(ch1) == 0) {
+                        map.remove(ch1);
+                    }
+                    left++;
+                }
+            }
+            right++;
+        }
+        return length;
+    }
+}
