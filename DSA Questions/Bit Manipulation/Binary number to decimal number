@@ -1,0 +1,16 @@
+
+class Solution {
+    public int binaryToDecimal(String b) {
+        // Code here
+        int n = b.length();
+        int p1 = 1;
+        int ans = 0;
+        for(int i=n-1; i>=0;i--) {
+            if(b.charAt(i) =='1') {
+                ans += p1;
+            }
+            p1 = p1 * 2;
+        }
+        return ans;
+    }
+}
