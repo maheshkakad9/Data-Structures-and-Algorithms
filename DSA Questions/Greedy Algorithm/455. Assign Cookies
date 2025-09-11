@@ -1,0 +1,27 @@
+class Solution {
+    public int findContentChildren(int[] g, int[] s) {
+        int cookiesCount = s.length;
+        int childrenCount = g.length;
+
+        if(cookiesCount == 0) {
+            return 0;
+        }
+
+        Arrays.sort(g);
+        Arrays.sort(s);
+
+        int cookieIndex = cookiesCount - 1;
+        int childrenIndex = childrenCount - 1;
+        int maxChildrenCount = 0;
+        while(cookieIndex >= 0 && childrenIndex >= 0) {
+            if(s[cookieIndex] >= g[childrenIndex]) {
+                maxChildrenCount++;
+                cookieIndex--;
+                childrenIndex--;
+            } else {
+                childrenIndex--;
+            }
+        }
+        return maxChildrenCount;
+    }
+}
