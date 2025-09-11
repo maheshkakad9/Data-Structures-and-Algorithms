@@ -1,0 +1,34 @@
+class Solution {
+    public double fractionalKnapsack(int[] val, int[] wt, int capacity) {
+        // code here
+        int n = val.length;
+        
+        Integer[] indices = new Integer[n];
+        for (int i = 0; i < n; i++) {
+            indices[i] = i;
+        }
+        
+        Arrays.sort(indices, (a,b) -> {
+            double ratioA = (double) val[a] / wt[a];
+            double ratioB = (double) val[b] / wt[b];
+            return Double.compare(ratioB,ratioA);
+        });
+        
+        double maxValue = 0.0;
+        int remainingCapacity = capacity;
+        
+        for (int i = 0; i < n && remainingCapacity > 0; i++) {
+            int idx = indices[i];
+            
+            if (wt[idx] <= remainingCapacity) {
+                maxValue += val[idx];
+                remainingCapacity -= wt[idx];
+            } else {
+                double fraction = (double) remainingCapacity / wt[idx];
+                maxValue += val[idx] * fraction;
+                remainingCapacity = 0;
+            }
+        }
+        return maxValue;
+    }
+}
