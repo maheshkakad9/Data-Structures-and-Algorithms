@@ -1,0 +1,57 @@
+Time Complexity: O(n) - single pass through the array
+Space Complexity: O(1) - only using constant extra space
+class Solution {
+    public int jump(int[] nums) {
+        int n = nums.length;
+        if (n <= 1) return 0;
+        
+        int jumps = 0;
+        int currentEnd = 0;  // End of the range that we can reach with current number of jumps
+        int farthest = 0;    // Farthest point we can reach with one more jump
+        
+        // We don't need to consider the last index in our loop
+        // because we're guaranteed to reach it
+        for (int i = 0; i < n - 1; i++) {
+            // Update the farthest point we can reach
+            farthest = Math.max(farthest, i + nums[i]);
+            
+            // If we've reached the end of current jump range
+            if (i == currentEnd) {
+                jumps++;
+                currentEnd = farthest;
+                
+                // If we can already reach the end, break early
+                if (currentEnd >= n - 1) {
+                    break;
+                }
+            }
+        }
+        
+        return jumps;
+    }
+}
+
+// Test class to verify the solution
+class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        
+        // Test case 1: [2,3,1,1,4]
+        int[] nums1 = {2, 3, 1, 1, 4};
+        System.out.println("Test 1: " + sol.jump(nums1)); // Expected: 2
+        
+        // Test case 2: [2,3,0,1,4]
+        int[] nums2 = {2, 3, 0, 1, 4};
+        System.out.println("Test 2: " + sol.jump(nums2)); // Expected: 2
+        
+        // Additional test cases
+        int[] nums3 = {1};
+        System.out.println("Test 3: " + sol.jump(nums3)); // Expected: 0
+        
+        int[] nums4 = {1, 1, 1, 1};
+        System.out.println("Test 4: " + sol.jump(nums4)); // Expected: 3
+        
+        int[] nums5 = {5, 9, 3, 2, 1, 0, 2, 3, 3, 1, 0, 0};
+        System.out.println("Test 5: " + sol.jump(nums5)); // Expected: 3
+    }
+}
