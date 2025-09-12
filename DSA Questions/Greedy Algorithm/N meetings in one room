@@ -1,0 +1,57 @@
+Time Complexity: O(n log n) due to sorting
+Space Complexity: O(n) for the meetings array
+import java.util.*;
+
+class Solution {
+    // Function to find the maximum number of meetings that can
+    // be performed in a meeting room.
+    public int maxMeetings(int start[], int end[]) {
+        int n = start.length;
+        
+        // Create array of meetings with start and end times
+        int[][] meetings = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            meetings[i][0] = start[i];  // start time
+            meetings[i][1] = end[i];   // end time
+        }
+        
+        // Sort meetings by end time (greedy choice)
+        Arrays.sort(meetings, (a, b) -> Integer.compare(a[1], b[1]));
+        
+        int count = 0;
+        int lastEndTime = -1;
+        
+        // Greedily select meetings
+        for (int i = 0; i < n; i++) {
+            // If current meeting starts after or when the last selected meeting ends
+            if (meetings[i][0] > lastEndTime) {
+                count++;
+                lastEndTime = meetings[i][1];
+            }
+        }
+        
+        return count;
+    }
+}
+
+// Test the solution
+class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        
+        // Test case 1
+        int[] start1 = {1, 3, 0, 5, 8, 5};
+        int[] end1 = {2, 4, 6, 7, 9, 9};
+        System.out.println("Test 1: " + sol.maxMeetings(start1, end1)); // Expected: 4
+        
+        // Test case 2
+        int[] start2 = {10, 12, 20};
+        int[] end2 = {20, 25, 30};
+        System.out.println("Test 2: " + sol.maxMeetings(start2, end2)); // Expected: 1
+        
+        // Test case 3
+        int[] start3 = {1, 2};
+        int[] end3 = {100, 99};
+        System.out.println("Test 3: " + sol.maxMeetings(start3, end3)); // Expected: 1
+    }
+}
