@@ -1,20 +1,20 @@
 class Solution {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        List<List<Integer>> list = new LinkedList<List<Integer>>();
+        List<List<Integer>> result = new LinkedList<List<Integer>>();
         Arrays.sort(candidates);
-        backtrack(list, new ArrayList<Integer>(), candidates, target, 0);
-        return list;
+        backtrack(result, new ArrayList<Integer>(), candidates, target, 0);
+        return result;
     }
 
-    private void backtrack(List<List<Integer>> list, List<Integer> tempList, int[] cand, int remain, int start) {
-        if(remain < 0) return;
-        else if (remain == 0) list.add(new ArrayList<>(tempList));
+    private void backtrack(List<List<Integer>> result, List<Integer> comb, int[] cand, int target, int start) {
+        if(target < 0) return;
+        else if (target == 0) result.add(new ArrayList<>(comb));
         else {
             for (int i = start; i < cand.length; i++) {
                 if (i > start && cand[i] == cand[i-1]) continue;
-                tempList.add(cand[i]);
-                backtrack(list, tempList, cand, remain - cand[i], i+1);
-                tempList.remove(tempList.size() - 1);
+                comb.add(cand[i]);
+                backtrack(result, comb, cand, target - cand[i], i+1);
+                comb.remove(comb.size() - 1);
             }
         }
     }
