@@ -1,0 +1,16 @@
+class Solution {
+    List<List<Integer>> res = new ArrayList<>();
+    public List<List<Integer>> subsets(int[] nums) {
+        backtrack(nums,new ArrayList<>(),0);
+        return res;
+    }
+    private void backtrack(int[] nums, List<Integer> comb, int start) {
+        res.add(new ArrayList<>(comb));
+
+        for(int i = start; i < nums.length; i++) {
+            comb.add(nums[i]);
+            backtrack(nums,comb,i+1);
+            comb.remove(comb.size() - 1);
+        }
+    }
+}
